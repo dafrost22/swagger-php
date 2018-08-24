@@ -221,8 +221,9 @@ class Analysis
 
     public function getUsedTraits($class)
     {
-        if (empty($class) || !class_exists($class)) {
-            return [];
+        if (!class_exists($class)
+        ||empty($class)) {
+            return null;
         }
 
         $usedTraits = class_uses($class);
@@ -236,7 +237,7 @@ class Analysis
                 }
             }
         }
-        
+
         return $definitions;
     }
 
