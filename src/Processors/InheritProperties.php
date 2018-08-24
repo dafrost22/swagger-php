@@ -50,16 +50,15 @@ class InheritProperties
 
                 $className = $schema->_context->fullyQualifiedName($schema->_context->class);
                 //Get inherited/exteneded classes to combine properties
-                $definitions = $analysis->getSuperClasses($className);
+                $inheritedClasses = $analysis->getSuperClasses($className);
                 //Get Traits to combine properties
                 $usedTraits = $analysis->getUsedTraits($className);
-                if (!empty($usedTraits)) {
-                    $definitions = array_merge($definitions, $usedTraits);
-                }
 
-                foreach ($definitions as $definition) {
-                    if ($definition['context']->annotations) {
-                        foreach ($definition['context']->annotations as $annotation) {
+                $defintions = array_merge($inheritedClasses, $usedTraits);
+
+                foreach ($defintions as $defintion) {
+                    if ($defintion['context']->annotations) {
+                        foreach ($defintion['context']->annotations as $annotation) {
                             if ($annotation instanceof Schema && $annotation->schema) {
                                 $this->addAllOfProperty($schema, $annotation);
 
@@ -68,7 +67,7 @@ class InheritProperties
                         }
                     }
 
-                    foreach ($definition['properties'] as $property) {
+                    foreach ($defintion['properties'] as $property) {
                         if (is_array($property->annotations) === false && !($property->annotations instanceof Traversable)) {
                             continue;
                         }
