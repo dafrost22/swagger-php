@@ -221,10 +221,7 @@ class Analysis
 
     public function getUsedTraits($class)
     {
-        if (
-            empty($class) 
-        || !class_exists($class)
-        ) {
+        if (!isset($this->classes[$class])) {
             return [];
         }
         $usedTraits = class_uses($class);
