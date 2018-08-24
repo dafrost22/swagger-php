@@ -221,7 +221,8 @@ class Analysis
 
     public function getUsedTraits($class)
     {
-        if (!class_exists($class, true)) {
+        $realClass = class_exists($class, true);
+        if (!$realClass) {
             return [];
         }
         $usedTraits = class_uses($class);
