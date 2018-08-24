@@ -224,7 +224,7 @@ class Analysis
         var_dump('class');
         var_dump($class);
         $realClass = class_exists($class, true);
-        if (!$realClass) {
+        if ($class = 'class' || !$realClass) {
             return [];
         }
         $usedTraits = class_uses($class);
