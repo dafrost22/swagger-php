@@ -222,7 +222,7 @@ class Analysis
     public function getUsedTraits($class)
     {
         print($class);
-        if (!class_exists($class)) {
+        if (!is_string($class) || !class_exists($class)) {
             return [];
         }
         $usedTraits = class_uses($class);
