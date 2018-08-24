@@ -52,7 +52,6 @@ class InheritProperties
                 //Get inherited/exteneded classes to combine properties
                 $inheritedClasses = $analysis->getSuperClasses($className);
                 $usedTraits = $analysis->getTraitsOfClass($className);
-                var_dump($usedTraits);
                 //Get Traits to combine properties
                 $usedTraits = $analysis->getUsedTraits($className);
 

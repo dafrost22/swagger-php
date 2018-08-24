@@ -221,6 +221,8 @@ class Analysis
 
     public function getUsedTraits($class)
     {
+        var_dump('class');
+        var_dump($class);
         $realClass = class_exists($class, true);
         if (!$realClass) {
             return [];
