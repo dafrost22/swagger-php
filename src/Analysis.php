@@ -221,23 +221,20 @@ class Analysis
 
     public function getUsedTraits($class)
     {
-        if (!class_exists($class)
-        || empty($class)) {
-            return null;
+        if(empty($class))
+            return [];
+        if (!class_exists($class)) {
+            return [];
         }
-
         $usedTraits = class_uses($class);
         $definitions = [];
-        if (!empty($usedTraits)) {
-            foreach ($usedTraits as $usedTrait) {
-                $usedTrait = '\\'.$usedTrait;
-                $usedDefinition = isset($this->classes[$usedTrait]) ? $this->classes[$usedTrait] : null;
-                if ($usedDefinition) {
-                    $definitions[$usedTrait] = $usedDefinition;
-                }
+        foreach ($usedTraits as $usedTrait) {
+            $usedTrait = '\\'.$usedTrait;
+            $usedDefinition = isset($this->classes[$usedTrait]) ? $this->classes[$usedTrait] : null;
+            if ($usedDefinition) {
+                $definitions[$usedTrait] = $usedDefinition;
             }
         }
-
         return $definitions;
     }
 
