@@ -223,7 +223,7 @@ class Analysis
     {
         if(empty($class) || !is_string($class))
             return [];
-        if (!class_exists($class)) {
+        if (!class_exists($class, false)) {
             return [];
         }
         $usedTraits = class_uses($class);
