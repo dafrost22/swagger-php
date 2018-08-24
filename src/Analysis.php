@@ -221,10 +221,12 @@ class Analysis
 
     public function getUsedTraits($class)
     {
-        var_dump('class');
+        if ($class == 'class' || $class == '\\')
+            return [];
+
         var_dump($class);
         $realClass = class_exists($class, true);
-        if ($class == 'class' || $class == '\\' || !$realClass) {
+        if(!$realClass) {
             return [];
         }
         $usedTraits = class_uses($class);
