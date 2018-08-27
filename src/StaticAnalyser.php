@@ -263,9 +263,8 @@ class StaticAnalyser
             if ($token[0] === T_USE) {
                 $statements = $this->parseUseStatement($tokens, $token, $parseContext);
                 foreach ($statements as $alias => $target) {
-                    if (strpos($target, '\\')) {
-                        $targetPieces = explode('\\', $target);
-                        $target = end($targetPieces);
+                    if ($target[0] === '\\') {
+                        $target = substr($target, 1);
                     }
 
                     $parseContext->uses[$alias] = $target;
